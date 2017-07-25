@@ -2,11 +2,6 @@
 #Обновление менеджера пакетов
 sudo apt-get update --fix-missing
 
-# Установка zsh
-sudo apt-get -y install zsh
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-sudo usermod -s /usr/bin/zsh vagrant
-
 # Устанавливаем mc:
 sudo apt-get -y install mc
 
@@ -19,7 +14,7 @@ sudo npm install -g n
 sudo n stable
 
 #Копируем дефолтный хост
-cp -r /vagrant/public /var/www 
+cp -r /vagrant/public /var/www
 
 # Добавляем виртуальные хосты из папки «www»:
 for vhFile in /var/www/vhosts/*.conf
@@ -44,9 +39,16 @@ phpize
 ./configure
 make
 sudo cp modules/xdebug.so /usr/lib/php/20151012
-cat /vagrant/xdebug.ini | sudo tee -a /etc/php/7.0/apache2/php.ini
+cat /vagrant/config/xdebug.ini | sudo tee -a /etc/php/7.0/apache2/php.ini
 
 # выставляем права и перезапускаем apache
 #sudo chmod -R 755 /var/www
 sudo service apache2 restart
 
+# Установка zsh
+sudo apt-get -y install zsh
+sudo usermod -s /usr/bin/zsh vagrant
+#cp /vagrant/config/.zshrc ~/zshrc
+echo 'Now run'
+echo 'sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"'
+echo 'to install oh-my-zsh plugin'

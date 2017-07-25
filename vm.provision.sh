@@ -14,7 +14,7 @@ sudo npm install -g n
 sudo n stable
 
 #Копируем дефолтный хост
-cp -r /vagrant/public /var/www
+cp -r /vagrant/public/* /var/www
 
 # Добавляем виртуальные хосты из папки «www»:
 for vhFile in /var/www/vhosts/*.conf
